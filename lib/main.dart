@@ -41,47 +41,54 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Stack(children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(64),
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg.jpg'),
-                  fit: BoxFit.cover)),
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-        Container(color: Colors.white.withOpacity(0.2)),
-        Container(
-          margin: EdgeInsets.all(64),
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: 24,
-                spreadRadius: 8,
-                color: Colors.black.withOpacity(0.2))
-          ]),
-          child: Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                          width: 2, color: Colors.white.withOpacity(0.2))),
-                ),
-              ),
+        body: Stack(children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(64),
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/bg.jpg'),
+                    fit: BoxFit.cover)),
+          ),
+          Container(color: Colors.white.withOpacity(0.2)),
+          GlassPanel()
+        ]));
+  }
+}
+
+class GlassPanel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(64),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            blurRadius: 24,
+            spreadRadius: 8,
+            color: Colors.black.withOpacity(0.2))
+      ]),
+      child: Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                      width: 2, color: Colors.white.withOpacity(0.2))),
+              child: Center(child: Text('Glass panel')),
             ),
           ),
         ),
-      ]),
+      ),
     );
   }
 }
