@@ -64,28 +64,17 @@ class _MyHomePageState extends State<MyHomePage> {
           //     height: 100,
           //   ),
           // )
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [GlassPanel(), GlassPanel()],
-                  ),
-                  GlassPanel()
-                ]),
+          Center(
+            child: Column(),
           )
         ]));
   }
 }
 
 class GlassPanel extends StatelessWidget {
-  final String strText;
   final bool bExpand;
-  GlassPanel({this.strText: 'Glass panel', this.bExpand: true});
+  final Widget child;
+  GlassPanel({this.bExpand: true, this.child: const Text('Glass Panel')});
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +97,12 @@ class GlassPanel extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                         width: 2, color: Colors.white.withOpacity(0.2))),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(strText),
-                )),
+                child: bExpand
+                    ? Center(
+                        child: child,
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0), child: child)),
           ),
         ),
       ),
