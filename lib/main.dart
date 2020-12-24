@@ -42,16 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        margin: EdgeInsets.all(64),
-        padding: EdgeInsets.all(32),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/bg.png'),
-                fit: BoxFit.scaleDown)),
-      ),
+      body: Stack(children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(64),
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg.jpg'),
+                  fit: BoxFit.cover)),
+        ),
+      ]),
     );
   }
 }
