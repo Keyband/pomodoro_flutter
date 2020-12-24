@@ -1,6 +1,8 @@
 // Don't forget to credit the icon: https://www.flaticon.com/free-icon/tomato_1412511?related_item_id=1413626&term=tomato
 // BG image: https://www.pexels.com/photo/red-tomatoes-on-board-2899682/
 // Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -52,7 +54,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   image: AssetImage('assets/images/bg.jpg'),
                   fit: BoxFit.cover)),
         ),
-        Container(color: Colors.white.withOpacity(0.2))
+        Container(color: Colors.white.withOpacity(0.2)),
+        Container(
+          margin: EdgeInsets.all(64),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                blurRadius: 24,
+                spreadRadius: 8,
+                color: Colors.black.withOpacity(0.2))
+          ]),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                          width: 2, color: Colors.white.withOpacity(0.2))),
+                ),
+              ),
+            ),
+          ),
+        ),
       ]),
     );
   }
