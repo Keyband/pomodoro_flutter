@@ -65,16 +65,36 @@ class _MyHomePageState extends State<MyHomePage> {
           //   ),
           // )
           Center(
-            child: Column(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                GlassPanel(
+                  bExpandAndCenter: true,
+                  child: Text(
+                    'Pomodoro Glass',
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                GlassPanel(
+                  bExpandAndCenter: false,
+                  child: Text(
+                    'Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass ',
+                    textAlign: TextAlign.left,
+                  ),
+                )
+              ],
+            ),
           )
         ]));
   }
 }
 
 class GlassPanel extends StatelessWidget {
-  final bool bExpand;
+  final bool bExpandAndCenter;
   final Widget child;
-  GlassPanel({this.bExpand: true, this.child: const Text('Glass Panel')});
+  GlassPanel(
+      {this.bExpandAndCenter: true, this.child: const Text('Glass Panel')});
 
   @override
   Widget build(BuildContext context) {
@@ -86,26 +106,25 @@ class GlassPanel extends StatelessWidget {
             spreadRadius: 8,
             color: Colors.black.withOpacity(0.2))
       ]),
-      child: Center(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                        width: 2, color: Colors.white.withOpacity(0.2))),
-                child: bExpand
-                    ? Center(
-                        child: child,
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0), child: child)),
-          ),
+      // child: Container(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+          child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                      width: 2, color: Colors.white.withOpacity(0.2))),
+              child: bExpandAndCenter
+                  ? Center(
+                      child: child,
+                    )
+                  : Padding(padding: const EdgeInsets.all(8.0), child: child)),
         ),
       ),
+      // ),
     );
   }
 }
