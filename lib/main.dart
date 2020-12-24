@@ -1,5 +1,5 @@
 // Don't forget to credit the icon: https://www.flaticon.com/free-icon/tomato_1412511?related_item_id=1413626&term=tomato
-
+// Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
