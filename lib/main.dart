@@ -55,16 +55,42 @@ class _MyHomePageState extends State<MyHomePage> {
                     fit: BoxFit.cover)),
           ),
           Container(color: Colors.white.withOpacity(0.2)),
-          GlassPanel()
+          // FittedBox(
+          //   fit: BoxFit.none,
+          //   alignment: Alignment.center,
+          //   child: Container(
+          //     color: Colors.black,
+          //     width: 100,
+          //     height: 100,
+          //   ),
+          // )
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [GlassPanel(), GlassPanel()],
+                  ),
+                  GlassPanel()
+                ]),
+          )
         ]));
   }
 }
 
 class GlassPanel extends StatelessWidget {
+  final String strText;
+  final bool bExpand;
+  GlassPanel({this.strText: 'Glass panel', this.bExpand: true});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(64),
+      padding: EdgeInsets.all(64),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             blurRadius: 24,
@@ -77,15 +103,15 @@ class GlassPanel extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                      width: 2, color: Colors.white.withOpacity(0.2))),
-              child: Center(child: Text('Glass panel')),
-            ),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                        width: 2, color: Colors.white.withOpacity(0.2))),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(strText),
+                )),
           ),
         ),
       ),
