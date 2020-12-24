@@ -1,4 +1,5 @@
 // Don't forget to credit the icon: https://www.flaticon.com/free-icon/tomato_1412511?related_item_id=1413626&term=tomato
+// BG image: https://www.pexels.com/photo/red-tomatoes-on-board-2899682/
 // Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
 import 'package:flutter/material.dart';
 
@@ -42,13 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
+        margin: EdgeInsets.all(64),
         padding: EdgeInsets.all(32),
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/bg.png'),
-                fit: BoxFit.contain)),
+                fit: BoxFit.scaleDown)),
       ),
     );
   }
