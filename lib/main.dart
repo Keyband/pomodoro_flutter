@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   image: AssetImage('assets/images/bg.jpg'),
                   fit: BoxFit.cover)),
         ),
+        Container(color: Colors.white.withOpacity(0.2))
       ]),
     );
   }
