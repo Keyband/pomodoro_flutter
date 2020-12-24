@@ -67,21 +67,19 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                GlassPanel(
-                  bExpandAndCenter: true,
-                  child: Text(
-                    'Pomodoro Glass',
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                GlassPanel(
-                  bExpandAndCenter: false,
-                  child: Text(
-                    'Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass Pomodoro Glass ',
-                    textAlign: TextAlign.left,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    GlassPanel(
+                      child: Text('Pomodoro Glass'),
+                    ),
+                    GlassPanel(
+                      child: Text('00:00'),
+                    )
+                  ],
                 )
               ],
             ),
@@ -99,7 +97,7 @@ class GlassPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(64),
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             blurRadius: 24,
