@@ -118,7 +118,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class GlassButton extends StatelessWidget {
   final String text;
-  GlassButton({this.text: 'Jonas'});
+  // final Function callbackFunction;
+  final VoidCallback callbackFunction;
+  static void defaultCallback() {
+    print('Callback não definido.');
+  }
+
+  GlassButton({this.text: 'Jonas', this.callbackFunction: defaultCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -126,9 +132,7 @@ class GlassButton extends StatelessWidget {
         child: RaisedButton(
       elevation: 0,
       color: Colors.red[600],
-      onPressed: () {
-        print('Ué');
-      },
+      onPressed: callbackFunction,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(color: Colors.red[400])),
