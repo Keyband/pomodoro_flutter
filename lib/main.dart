@@ -62,20 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Stack(children: <Widget>[
+        body: Stack(fit: StackFit.expand, children: <Widget>[
           Container(
             padding: EdgeInsets.all(64),
-            // width: double.infinity,
-            // height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/bg.jpg'),
                     fit: BoxFit.cover)),
           ),
           Container(color: Colors.white.withOpacity(0.2)),
-          // GlassPanel(
-          // bExpandAndCenter: false,
-          //Remove this later, I think
           Container(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -87,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     GlassPanel(
-                      child: Expanded(
+                      child: Container(
                         child: AutoSizeText(
                           'Pomodoro Glass',
                           style: TextStyle(fontSize: 22),
@@ -99,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     GlassPanel(
-                      child: Expanded(
+                      child: Container(
                         child: AutoSizeText(
                           '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
                           style: TextStyle(fontSize: 22),
@@ -121,8 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(child: GlassButton(text: 'Pause')),
-                    Expanded(child: GlassButton(text: 'Stop'))
+                    Container(child: GlassButton(text: 'Pause')),
+                    Container(child: GlassButton(text: 'Stop'))
                   ],
                 )
               ],
