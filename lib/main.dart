@@ -4,9 +4,12 @@
 // Font used: https://fonts.google.com/specimen/Montserrat
 import 'dart:ui';
 import 'dart:async';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,13 +39,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Timer _timer;
   int pomodoroTime = 0;
-  void startTimer({int startTimeInSeconds: 15}) {
+  void startTimer({int startTimeInSeconds: 5}) {
     pomodoroTime = startTimeInSeconds;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         pomodoroTime--;
         if (pomodoroTime <= 0) {
           _timer.cancel();
+          if (!kIsWeb) {
+            FlutterRingtonePlayer.playNotification();
+          } else {
+            print('Fim');
+          }
         }
       });
     });
