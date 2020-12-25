@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Pomodoro Flutter',
       theme: ThemeData(
         primarySwatch: Colors.red,
+        fontFamily: 'Montserrat',
       ),
       home: MyHomePage(title: 'Pomodoro Flutter'),
     );
@@ -144,7 +145,7 @@ class GlassButton extends StatelessWidget {
           side: BorderSide(color: Colors.white)),
       child: AutoSizeText(
         text,
-        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300, fontFamily: ),
+        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
       ),
     ));
   }

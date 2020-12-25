@@ -85,4 +85,4 @@ flutter:
         - asset: assets/fonts/Montserrat-Italic.ttf
           style: italic
         - asset: assets/fonts/Montserrat-Bold.ttf
-          style: bold
+          weight: 700
