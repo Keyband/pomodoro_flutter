@@ -172,6 +172,14 @@ class GlassPanel extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
           child: Container(
               decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                      Colors.white.withOpacity(0.3),
+                      Colors.white.withOpacity(0.15)
+                    ],
+                  ),
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
