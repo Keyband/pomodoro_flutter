@@ -135,7 +135,7 @@ class GlassButton extends StatelessWidget {
       child: AutoSizeText(
         text,
         style: TextStyle(
-            fontSize: 36, fontWeight: FontWeight.w300, color: Colors.white),
+            fontSize: 36, fontWeight: FontWeight.w300, color: Colors.black),
       ),
     ));
   }
@@ -153,15 +153,15 @@ class GlassPanel extends StatelessWidget {
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-            blurRadius: 24,
+            blurRadius: 128,
             spreadRadius: 8,
-            color: Colors.black.withOpacity(0.2))
+            color: Colors.black.withOpacity(0.3))
       ]),
       // child: Container(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
           child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
