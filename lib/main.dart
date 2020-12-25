@@ -3,6 +3,7 @@
 // Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -47,26 +48,21 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Stack(children: <Widget>[
           Container(
             padding: EdgeInsets.all(64),
-            width: double.infinity,
-            height: double.infinity,
+            // width: double.infinity,
+            // height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/bg.jpg'),
                     fit: BoxFit.cover)),
           ),
           Container(color: Colors.white.withOpacity(0.2)),
-          // FittedBox(
-          //   fit: BoxFit.none,
-          //   alignment: Alignment.center,
-          //   child: Container(
-          //     color: Colors.black,
-          //     width: 100,
-          //     height: 100,
-          //   ),
-          // )
-          Center(
+          // GlassPanel(
+          // bExpandAndCenter: false,
+          //Remove this later, I think
+          Container(
+            padding: EdgeInsets.all(16),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Row(
@@ -74,17 +70,82 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     GlassPanel(
-                      child: Text('Pomodoro Glass'),
+                      child: Expanded(
+                        child: AutoSizeText(
+                          'Pomodoro Glass',
+                          style: TextStyle(fontSize: 22),
+                          minFontSize: 16,
+                          maxFontSize: 32,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
                     GlassPanel(
-                      child: Text('00:00'),
+                      child: Expanded(
+                        child: AutoSizeText(
+                          '00:00:00',
+                          style: TextStyle(fontSize: 22),
+                          minFontSize: 16,
+                          maxFontSize: 32,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
+                  ],
+                ),
+                GlassPanel(
+                    child: RaisedButton(
+                  autofocus: true,
+                  color: Colors.red,
+                  onPressed: () {
+                    print('Ué');
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(color: Colors.white)),
+                  child: AutoSizeText(
+                    'Start',
+                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
+                  ),
+                )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(child: GlassButton(text: 'Pause')),
+                    Expanded(child: GlassButton(text: 'Stop'))
                   ],
                 )
               ],
             ),
-          )
+          ),
+          // )
         ]));
+  }
+}
+
+class GlassButton extends StatelessWidget {
+  final String text;
+  GlassButton({this.text: 'Jonas'});
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassPanel(
+        child: RaisedButton(
+      color: Colors.red,
+      onPressed: () {
+        print('Ué');
+      },
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: Colors.white)),
+      child: AutoSizeText(
+        text,
+        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
+      ),
+    ));
   }
 }
 
@@ -117,7 +178,10 @@ class GlassPanel extends StatelessWidget {
                       width: 2, color: Colors.white.withOpacity(0.2))),
               child: bExpandAndCenter
                   ? Center(
-                      child: child,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: child,
+                      ),
                     )
                   : Padding(padding: const EdgeInsets.all(8.0), child: child)),
         ),
