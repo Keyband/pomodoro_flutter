@@ -97,21 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ),
-                GlassPanel(
-                    child: RaisedButton(
-                  autofocus: true,
-                  color: Colors.red,
-                  onPressed: () {
-                    print('Ué');
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      side: BorderSide(color: Colors.white)),
-                  child: AutoSizeText(
-                    'Start',
-                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
-                  ),
-                )),
+                GlassButton(
+                  text: 'Start',
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,7 +134,8 @@ class GlassButton extends StatelessWidget {
           side: BorderSide(color: Colors.red[400])),
       child: AutoSizeText(
         text,
-        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
+        style: TextStyle(
+            fontSize: 36, fontWeight: FontWeight.w300, color: Colors.white),
       ),
     ));
   }
