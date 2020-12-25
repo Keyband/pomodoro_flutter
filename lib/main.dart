@@ -3,6 +3,7 @@
 // Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
 // Font used: https://fonts.google.com/specimen/Montserrat
 import 'dart:ui';
+import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +34,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  Timer _timer;
+  int pomodoroTime = 0;
+  void startTimer({int startTimeInSeconds: 15}) {
+    pomodoroTime = startTimeInSeconds;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        pomodoroTime--;
+        if (pomodoroTime <= 0) {
+          _timer.cancel();
+        }
+      });
     });
   }
 
@@ -86,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     GlassPanel(
                       child: Expanded(
                         child: AutoSizeText(
-                          '00:00:00',
+                          '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
                           style: TextStyle(fontSize: 22),
                           minFontSize: 16,
                           maxFontSize: 32,
@@ -98,8 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
                 GlassButton(
-                  text: 'Start',
-                ),
+                    text: 'Start',
+                    callbackFunction: () {
+                      startTimer();
+                    }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
