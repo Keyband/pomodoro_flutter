@@ -37,20 +37,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Timer _timer;
+  Timer _timer = Timer.periodic(Duration(days: 1), (timer) {});
   int pomodoroTime = 0;
-  void startTimer({int startTimeInSeconds: 5}) {
+
+  void startTimer({int startTimeInSeconds: 500}) {
     pomodoroTime = startTimeInSeconds;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         pomodoroTime--;
         if (pomodoroTime <= 0) {
           _timer.cancel();
-          if (!kIsWeb) {
-            FlutterRingtonePlayer.playNotification();
-          } else {
-            print('Fim');
-          }
+        }
+      });
+    });
+  }
+
+  void pauseTimer() {
+    _timer.cancel();
+  }
+
+  void unpauseTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        pomodoroTime--;
+        if (pomodoroTime <= 0) {
+          _timer.cancel();
         }
       });
     });
@@ -85,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         child: AutoSizeText(
                           'Pomodoro Glass',
-                          style: TextStyle(fontSize: 22),
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w300,
+                          ),
                           minFontSize: 16,
                           maxFontSize: 32,
                           maxLines: 1,
@@ -116,7 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(child: GlassButton(text: 'Pause')),
+                    Container(
+                        child: GlassButton(
+                      text: _timer.isActive ? 'Pause' : 'Unpause',
+                      callbackFunction: pauseTimer,
+                    )),
                     Container(child: GlassButton(text: 'Stop'))
                   ],
                 )
