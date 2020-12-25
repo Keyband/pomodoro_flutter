@@ -136,13 +136,14 @@ class GlassButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassPanel(
         child: RaisedButton(
-      color: Colors.red,
+      elevation: 0,
+      color: Colors.red[600],
       onPressed: () {
         print('Ué');
       },
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: BorderSide(color: Colors.white)),
+          side: BorderSide(color: Colors.red[400])),
       child: AutoSizeText(
         text,
         style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
