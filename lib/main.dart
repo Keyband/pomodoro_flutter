@@ -1,6 +1,7 @@
 // Don't forget to credit the icon: https://www.flaticon.com/free-icon/tomato_1412511?related_item_id=1413626&term=tomato
 // BG image: https://www.pexels.com/photo/red-tomatoes-on-board-2899682/
 // Link teaching some things about the glassmorphism: https://www.youtube.com/watch?v=mCyVx2rwd-U
+// Font used: https://fonts.google.com/specimen/Montserrat
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
