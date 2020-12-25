@@ -144,7 +144,7 @@ class GlassButton extends StatelessWidget {
           side: BorderSide(color: Colors.white)),
       child: AutoSizeText(
         text,
-        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300),
+        style: TextStyle(fontSize: 36, fontWeight: FontWeight.w300, fontFamily: ),
       ),
     ));
   }
