@@ -9,7 +9,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+//import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,7 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int pomodoroTime = 25 * 60;
   bool running = false;
 
-  void startTimer({int startTimeInSeconds: 60 * 25}) {
+  Future<AudioPlayer> playSfx() async {
+    AudioCache cache = new AudioCache();
+    return await cache.play("timeUp.wav", isNotification: true);
+  }
+
+  void startTimer({int startTimeInSeconds: 5}) {
     pomodoroTime = startTimeInSeconds;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -49,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         pomodoroTime--;
         if (pomodoroTime <= 0) {
           _timer.cancel();
+          playSfx();
         }
       });
     });
@@ -87,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 icon: Icon(Icons.stop),
                 onPressed: () {
+                  playSfx();
                   pauseTimer(resetTime: true);
                 },
               )
