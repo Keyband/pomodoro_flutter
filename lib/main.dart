@@ -38,12 +38,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Timer _timer = Timer.periodic(Duration(days: 1), (timer) {});
-  int pomodoroTime = 0;
+  int pomodoroTime = 25 * 60;
+  bool running = false;
 
-  void startTimer({int startTimeInSeconds: 500}) {
+  void startTimer({int startTimeInSeconds: 60 * 25}) {
     pomodoroTime = startTimeInSeconds;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
+        running = true;
         pomodoroTime--;
         if (pomodoroTime <= 0) {
           _timer.cancel();
@@ -52,9 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void pauseTimer() {
+  void pauseTimer({resetTime: false}) {
     setState(() {
+      running = false;
       _timer.cancel();
+      if (resetTime) {
+        pomodoroTime = 25 * 60;
+      }
     });
   }
 
@@ -81,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 icon: Icon(Icons.stop),
                 onPressed: () {
-                  print('Jonas pressionado');
+                  pauseTimer(resetTime: true);
                 },
               )
             ],
@@ -89,9 +95,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(_timer.isActive ? Icons.pause : Icons.play_arrow),
+          child: Icon(running ? Icons.pause : Icons.play_arrow),
           onPressed: () {
-            print('Jonas');
+            if (!running) {
+              if (pomodoroTime != 25 * 60) {
+                startTimer(startTimeInSeconds: pomodoroTime);
+              } else {
+                startTimer();
+              }
+            } else {
+              pauseTimer();
+            }
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
