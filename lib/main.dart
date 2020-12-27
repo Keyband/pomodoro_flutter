@@ -58,21 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void unpauseTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        pomodoroTime--;
-        if (pomodoroTime <= 0) {
-          _timer.cancel();
-        }
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Pomodoro Timer',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           color: Colors.red,
@@ -107,67 +106,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     image: AssetImage('assets/images/bg.jpg'),
                     fit: BoxFit.cover)),
           ),
-          Container(color: Colors.white.withOpacity(0.2)),
           Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              color: Colors.white.withOpacity(
+                  0.2)), // Used to make the BG image a little less intense
+          Column(
+              // padding: EdgeInsets.all(16),
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    GlassPanel(
-                      child: Container(
-                        child: AutoSizeText(
-                          'Pomodoro Glass',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          minFontSize: 16,
-                          maxFontSize: 32,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                    GlassPanel(
-                      child: Container(
-                        child: AutoSizeText(
-                          '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
-                          style: TextStyle(fontSize: 22),
-                          minFontSize: 16,
-                          maxFontSize: 32,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                GlassButton(
-                    text: 'Start',
-                    callbackFunction: () {
-                      startTimer();
-                    }),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        child: GlassButton(
-                      text: _timer.isActive ? 'Pause' : 'Unpause',
-                      callbackFunction: pauseTimer,
-                    )),
-                    Container(child: GlassButton(text: 'Stop'))
-                  ],
-                )
-              ],
-            ),
-          ),
-          // )
+                GlassPanel(
+                    child: Text(
+                  '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
+                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
+                ))
+              ]),
         ]));
   }
 }
