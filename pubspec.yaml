@@ -29,7 +29,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.1
   auto_size_text: ^2.1.0
-  flutter_ringtone_player: ^2.0.0
+  # flutter_ringtone_player: ^2.0.0
+  audioplayers: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
   assets:  
     - assets/images/logo.png
     - assets/images/bg.jpg
+    - assets/sounds/timeUp.wav
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
