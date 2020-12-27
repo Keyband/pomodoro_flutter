@@ -53,7 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void pauseTimer() {
-    _timer.cancel();
+    setState(() {
+      _timer.cancel();
+    });
   }
 
   void unpauseTimer() {
@@ -70,78 +72,103 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          color: Colors.red,
+          child: Row(
+            children: <Widget>[
+              Text('Jonas'),
+              IconButton(
+                icon: Icon(Icons.stop),
+                onPressed: () {
+                  print('Jonas pressionado');
+                },
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(_timer.isActive ? Icons.pause : Icons.play_arrow),
+          onPressed: () {
+            print('Jonas');
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // appBar: AppBar(
         //   title: Text(widget.title),
         // ),
         body: Stack(fit: StackFit.expand, children: <Widget>[
-      Container(
-        padding: EdgeInsets.all(64),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/bg.jpg'), fit: BoxFit.cover)),
-      ),
-      Container(color: Colors.white.withOpacity(0.2)),
-      Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Container(
+            padding: EdgeInsets.all(64),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/bg.jpg'),
+                    fit: BoxFit.cover)),
+          ),
+          Container(color: Colors.white.withOpacity(0.2)),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                GlassPanel(
-                  child: Container(
-                    child: AutoSizeText(
-                      'Pomodoro Glass',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w300,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    GlassPanel(
+                      child: Container(
+                        child: AutoSizeText(
+                          'Pomodoro Glass',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          minFontSize: 16,
+                          maxFontSize: 32,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      minFontSize: 16,
-                      maxFontSize: 32,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
+                    GlassPanel(
+                      child: Container(
+                        child: AutoSizeText(
+                          '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
+                          style: TextStyle(fontSize: 22),
+                          minFontSize: 16,
+                          maxFontSize: 32,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                GlassPanel(
-                  child: Container(
-                    child: AutoSizeText(
-                      '${(pomodoroTime / 60).floor().toString().padLeft(2, '0')}:${(pomodoroTime.remainder(60)).toString().padLeft(2, '0')}',
-                      style: TextStyle(fontSize: 22),
-                      minFontSize: 16,
-                      maxFontSize: 32,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                GlassButton(
+                    text: 'Start',
+                    callbackFunction: () {
+                      startTimer();
+                    }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        child: GlassButton(
+                      text: _timer.isActive ? 'Pause' : 'Unpause',
+                      callbackFunction: pauseTimer,
+                    )),
+                    Container(child: GlassButton(text: 'Stop'))
+                  ],
                 )
               ],
             ),
-            GlassButton(
-                text: 'Start',
-                callbackFunction: () {
-                  startTimer();
-                }),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    child: GlassButton(
-                  text: _timer.isActive ? 'Pause' : 'Unpause',
-                  callbackFunction: pauseTimer,
-                )),
-                Container(child: GlassButton(text: 'Stop'))
-              ],
-            )
-          ],
-        ),
-      ),
-      // )
-    ]));
+          ),
+          // )
+        ]));
   }
 }
 
