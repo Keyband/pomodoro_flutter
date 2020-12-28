@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // return await cache.play("timeUp.wav", isNotification: true);
   }
 
-  void startTimer({int startTimeInSeconds: 5}) {
+  void startTimer({int startTimeInSeconds: 25 * 60}) {
     pomodoroTime = startTimeInSeconds;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
