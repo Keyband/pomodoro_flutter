@@ -10,8 +10,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,13 +40,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const String urlToSfx =
+      'https://raw.githubusercontent.com/Keyband/e/main/timeUp.wav?token=AHJXRPC2DZTUBVVDBUV7OLC76KB7K';
   Timer _timer = Timer.periodic(Duration(days: 1), (timer) {});
   int pomodoroTime = 25 * 60;
   bool running = false;
 
-  Future<AudioPlayer> playSfx() async {
-    AudioCache cache = new AudioCache();
-    return await cache.play("timeUp.wav", isNotification: true);
+  static var player = AudioPlayer();
+  var duration = player.setUrl(urlToSfx, preload: true);
+
+  void playSfx() async {
+    player.play();
+    Future.delayed(const Duration(milliseconds: 400), () {
+      player.stop();
+    });
+
+    // AudioCache cache = new AudioCache();
+    // return await cache.play("timeUp.wav", isNotification: true);
   }
 
   void startTimer({int startTimeInSeconds: 5}) {
@@ -56,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         pomodoroTime--;
         if (pomodoroTime <= 0) {
           _timer.cancel();
+          running = false;
           playSfx();
         }
       });
@@ -91,7 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.red,
           child: Row(
             children: <Widget>[
-              Text('Jonas'),
               IconButton(
                 icon: Icon(Icons.stop),
                 onPressed: () {
