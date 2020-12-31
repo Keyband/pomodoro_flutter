@@ -45,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Timer _timer = Timer.periodic(Duration(days: 1), (timer) {});
   int pomodoroTime = 25 * 60;
   bool running = false;
-
+  bool isBreak = false;
+  int numberOfBreaks = 0;
   static var player = AudioPlayer();
   var duration = player.setUrl(urlToSfx, preload: true);
 
@@ -69,6 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
           _timer.cancel();
           running = false;
           playSfx();
+          if (isBreak) {
+            isBreak = false;
+            startTimer();
+          } else {
+            isBreak = true;
+            numberOfBreaks++;
+            startTimer(
+                startTimeInSeconds:
+                    (numberOfBreaks % 4 == 0) ? 10 * 60 : 5 * 60);
+          }
         }
       });
     });
