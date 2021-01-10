@@ -6,6 +6,7 @@
     "display": "standalone",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    "description": "Pomodoro timer made with Flutter.",
     "start_url": ".",
     "icons": [
         {
