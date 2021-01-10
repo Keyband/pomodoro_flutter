@@ -4,7 +4,8 @@
     "theme_color": "#f44336",
     "background_color": "#ef9a9a",
     "display": "standalone",
-    "orientation": "portrait",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
     "start_url": ".",
     "icons": [
         {
