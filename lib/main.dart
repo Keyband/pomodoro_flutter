@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'dart:async';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     // applicationLegalese:
                     // "Made by Guilherme R. Ribeiro.",
                     children: <Widget>[
-                      Text("Made by Guilherme R. Ribeiro. Credits:")
+                      Text("Made by Guilherme R. Ribeiro.\n\n"),
+                      Text("Credits (tap to open):\n"),
+                      InkWell(
+                        child: Text(
+                            '-Montserrat Font, by Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly at Google Fonts;\n'),
+                        onTap: () => launch(
+                            'https://fonts.google.com/specimen/Montserrat'),
+                      ),
+                      InkWell(
+                        child: Text(
+                            '-Background image, by Engin Akyurt at Pexels;\n'),
+                        onTap: () => launch(
+                            'https://www.pexels.com/photo/red-tomatoes-on-board-2899682/'),
+                      ),
+                      InkWell(
+                        child: Text(
+                            '-Application icon, by Freepik at Flaticon.\n'),
+                        onTap: () => launch(
+                            'https://www.flaticon.com/free-icon/tomato_1412511?related_item_id=1413626&term=tomato'),
+                      ),
                     ]),
               ),
               IconButton(
