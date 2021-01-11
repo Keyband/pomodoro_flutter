@@ -113,7 +113,21 @@ class _MyHomePageState extends State<MyHomePage> {
           shape: CircularNotchedRectangle(),
           color: Colors.red,
           child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.info),
+                onPressed: () => showAboutDialog(
+                    context: context,
+                    applicationVersion: "1.0",
+                    applicationName: "Pomodoro Timer",
+                    // applicationLegalese:
+                    // "Made by Guilherme R. Ribeiro.",
+                    children: <Widget>[
+                      Text("Made by Guilherme R. Ribeiro. Credits:")
+                    ]),
+              ),
               IconButton(
                 icon: Icon(Icons.stop),
                 onPressed: () {
@@ -122,7 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               )
             ],
-            mainAxisAlignment: MainAxisAlignment.end,
           ),
         ),
         floatingActionButton: FloatingActionButton(
