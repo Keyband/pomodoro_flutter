@@ -1,16 +1,5 @@
-# pomodoro_flutter
+# Pomodoro Flutter
 
-A new Flutter project.
+Another small project I made to learn more about webapp development with Flutter. In it I made some experiments with timers, sounds, and with the bottom navigation bar, and with some glassmorphism UI.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Um outro pequeno projeto que fiz para aprender mais sobre desenvolvimento de webapps com Flutter. Nele fiz alguns experimentos com timers, sons, e com a barra de navegação inferior, e com um visual seguindo a ideia do "Glassmorphism".
